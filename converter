@@ -1,0 +1,38 @@
+''' roman numeral converter '''
+
+def checkElm(arr, check, end):
+    for i in range(0, len(arr)):
+        if(arr[i] == end):
+            return False
+        elif(arr[i] == check):
+            return True
+            
+def getDeci(numeral):
+    if numeral == "I":
+        return 1
+    elif numeral == "V":
+        return 5
+    elif numeral == "X":
+        return 10
+    elif numeral == "L":
+        return 50
+    elif numeral == "C":
+        return 100 
+
+def toDeci(numeral):
+    numSize = ["C","L","X","V","I"]
+    total = 0
+    
+    for i in range(0, len(numeral)):
+        if i == 0:
+            total += getDeci(numeral[-i-1])
+        else:
+            if checkElm(numSize, numeral[-i], numeral[-i-1]):
+                total -= getDeci(numeral[-i-1])
+            else:
+                total += getDeci(numeral[-i-1])
+    
+    return int(total)
+
+numeral = input("Roman Numeral: ")       
+print(numeral + " = " + str(toDeci(numeral)))
